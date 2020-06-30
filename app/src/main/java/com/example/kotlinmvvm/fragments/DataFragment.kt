@@ -26,7 +26,8 @@ class DataFragment : Fragment() {
     private lateinit var recyclerListView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainActivityViewModel = ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
+        mainActivityViewModel =
+            ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
 
     }
 
@@ -49,31 +50,20 @@ class DataFragment : Fragment() {
             Log.e("size final", it.size.toString())
         })
         mainActivityViewModel.getApiData()
-            .observe(viewLifecycleOwner, Observer { mainActivityViewModel.saveData(it)
-                lateinit var rowsdata : MutableList<RowModel>
+            .observe(viewLifecycleOwner, Observer {
+                mainActivityViewModel.saveData(it)
+                lateinit var rowsdata: MutableList<RowModel>
 
-                    rowsdata = it.rows
+                rowsdata = it.rows
 
-                     //val adapter = ItemAdapter(rows, MainActivity::class)
-                    context?.let{val adapter = ItemAdapter(rowsdata, context!!)
-                        recyclerListView.adapter = adapter}
-
+                //val adapter = ItemAdapter(rows, MainActivity::class)
+                context?.let {
+                    val adapter = ItemAdapter(rowsdata, context!!)
+                    recyclerListView.adapter = adapter
+                }
 
 
             })
-//        mainActivityViewModel.getRowData().observe(viewLifecycleOwner, Observer {
-//            it.forEach {
-//                Log.e("data", it.title)
-//            }
-//        })
-    }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-
     }
 
 

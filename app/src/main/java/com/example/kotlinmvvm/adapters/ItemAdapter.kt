@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.view.ViewCompat.animate
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlinmvvm.R
@@ -39,14 +37,15 @@ class ItemAdapter(private val rows: MutableList<RowModel>, private val context: 
             holder.tv_title.setText("Not avilable")
         }
 
-        rows[position].imageHref?.let {url->
-            setImage(url, holder.image) }
+        rows[position].imageHref?.let { url ->
+            setImage(url, holder.image)
+        }
     }
 
     inner class MyHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val tv_title: TextView = view.findViewById(R.id.tv_title)
         val tv_description: TextView = view.findViewById(R.id.tv_description)
-        val image by lazy { view.findViewById<ImageView>(R.id.image)}
+        val image by lazy { view.findViewById<ImageView>(R.id.image) }
     }
 
     fun setImage(url: String, view: ImageView) {

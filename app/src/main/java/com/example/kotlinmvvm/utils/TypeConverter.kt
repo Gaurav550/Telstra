@@ -7,11 +7,6 @@ import com.google.gson.Gson
 
 class TypeConverterDB {
 
-//    @TypeConverter
-//    fun arrayToString(list: MutableList<RowModel>): String {
-//        val gson = Gson()
-//        return gson.toJson(list)
-//    }
     @TypeConverter
     fun listToJson(value: List<RowModel>?) = Gson().toJson(value)
 

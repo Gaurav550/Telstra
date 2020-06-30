@@ -24,7 +24,7 @@ class MainActivityRepository {
 
                 override fun onResponse(call: retrofit2.Call<Items>, response: Response<Items>) {
 
-                    // will be wxwcutes only if the rows is not null
+                    // will be wxecutes only if the rows is not null
                     response.body()?.let {
                         headerItem.value = it
                         myItemData.value = it.rows
@@ -34,7 +34,7 @@ class MainActivityRepository {
                 }
 
                 override fun onFailure(call: retrofit2.Call<Items>, t: Throwable) {
-                    //Toast.makeText(, "Somthing went wrong", Toast.LENGTH_LONG).show()
+
                     print("on failuire called")
                 }
 
