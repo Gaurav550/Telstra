@@ -30,6 +30,8 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             databaseRepository.insertRow(items)
     }
 
+    fun title() = mainActivityRepository.getTitle()
+
     //fun getRowData() = databaseRepository.getRows()
 
 }

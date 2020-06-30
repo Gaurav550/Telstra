@@ -10,6 +10,6 @@ import com.example.kotlinmvvm.utils.Constants
 data class Items(
     @PrimaryKey(autoGenerate = true)
     var itemId: Int,
-//    val title : String,
+    val title : String,
     val rows: MutableList<RowModel>
 )

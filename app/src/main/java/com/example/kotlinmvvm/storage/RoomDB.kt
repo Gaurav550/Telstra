@@ -7,7 +7,7 @@ import com.example.kotlinmvvm.models.RowModel
 import com.example.kotlinmvvm.storage.roomDAO.ItemDao
 import com.example.kotlinmvvm.utils.TypeConverterDB
 
-@Database(entities = [Items::class], version = 2)
+@Database(entities = [Items::class], version = 3)
 @TypeConverters(TypeConverterDB::class)
 abstract class RoomDB : RoomDatabase() {
 

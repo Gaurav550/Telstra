@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProviders
 import com.example.kotlinmvvm.R
 import com.example.kotlinmvvm.fragments.DataFragment
+import com.example.kotlinmvvm.viewmodels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var toolbar: TextView
     lateinit var fragmentMain: Fragment
+    lateinit var  viewmodel : MainActivityViewModel
     val fragmentManager: FragmentManager = supportFragmentManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +25,10 @@ class MainActivity : AppCompatActivity() {
     fun initViews() {
         toolbar = findViewById(R.id.toolbar)
         fragmentManager.beginTransaction().add(R.id.fragment_main, DataFragment()).commit()
+         viewmodel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        toolbar.text = viewmodel.title()
     }
+
+
 
 }
