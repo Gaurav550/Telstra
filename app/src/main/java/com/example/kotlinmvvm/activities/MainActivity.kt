@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.kotlinmvvm.R
 import com.example.kotlinmvvm.fragments.DataFragment
@@ -19,13 +20,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
+        viewmodel.title().observe(this, Observer {
+            toolbar.text = it
+        })
     }
 
     private fun initViews() {
         toolbar = findViewById(R.id.toolbar)
         fragmentManager.beginTransaction().add(R.id.fragment_main, DataFragment()).commit()
         viewmodel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-        toolbar.text = viewmodel.title()
     }
 
 

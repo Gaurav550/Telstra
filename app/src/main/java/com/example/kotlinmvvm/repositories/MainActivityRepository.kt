@@ -15,7 +15,7 @@ class MainActivityRepository {
 
     private var myItemData = MutableLiveData<MutableList<RowModel>>()
     private var headerItem = MutableLiveData<Items>()
-    private var title: String? = "My Toolbar"
+    private var title: MutableLiveData<String> = MutableLiveData<String>()
 
     fun getDataFromApi(): LiveData<MutableList<RowModel>> {
         RetrofitObject.retrofitInstance.create(RetrofitService::class.java).getData()
@@ -28,7 +28,7 @@ class MainActivityRepository {
                     response.body()?.let {
                         headerItem.value = it
                         myItemData.value = it.rows
-                        title = headerItem.value?.title!!
+                        title.value = headerItem.value?.title
                         print("on response called")
                     }
                 }
@@ -45,8 +45,8 @@ class MainActivityRepository {
     fun getApiItemns(): LiveData<Items> {
         return headerItem
     }
-    fun getTitle():String{
+    fun getTitle():MutableLiveData<String>{
 
-        return title!!
+        return title
     }
 }
