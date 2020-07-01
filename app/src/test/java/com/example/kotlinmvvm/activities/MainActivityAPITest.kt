@@ -2,7 +2,9 @@ package com.example.kotlinassignment.activities
 
 import com.example.kotlinassignment.models.Items
 import com.example.kotlinmvvm.activities.MainActivity
+import com.example.kotlinmvvm.interfaces.RetrofitService
 import com.example.kotlinmvvm.repositories.MainActivityRepository
+import com.example.kotlinmvvm.singletons.RetrofitObject
 import org.junit.After
 import org.junit.Before
 
@@ -15,17 +17,17 @@ import retrofit2.Response
 
 class MainActivityAPITest {
 
-//    @Captor
+    //    @Captor
 //    private lateinit var argumentCaptor: ArgumentCaptor<Callback<Items>>
-@Captor
-private lateinit var argumentCaptor: ArgumentCaptor<Callback<Items>>
+    @Captor
+    private lateinit var argumentCaptor: ArgumentCaptor<Callback<Items>>
     @Mock
     private lateinit var callback: Callback<Items>
     @Mock
     private lateinit var call: Call<Items>
     private lateinit var response: Response<Items>
     private lateinit var mainActivity: MainActivity
-    private lateinit var mainActivityRepository : MainActivityRepository
+    private lateinit var mainActivityRepository: MainActivityRepository
 
     @Before
     fun setUp() {
@@ -39,13 +41,20 @@ private lateinit var argumentCaptor: ArgumentCaptor<Callback<Items>>
     @Test
     fun testApi() {
         //mainActivity.retrofitCall()
-mainActivityRepository.getApiItemns()
+        mainActivityRepository.getApiItemns()
 
         //val argument = ArgumentCaptor.forClass(MainActivityRepository::class.java)
         call.enqueue(argumentCaptor.capture())
         argumentCaptor.value.onResponse(call, response)
         verify(callback).onResponse(call, response)
     }
+//    @Test
+//    fun testApi(){
+//    val api = RetrofitObject.retrofitInstance.create(RetrofitService::class.java)
+//
+////    val body = response.body()
+////    val code = response.code()
+//}
 
     @After
     fun tearDown() {
