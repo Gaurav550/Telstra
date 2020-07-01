@@ -31,5 +31,4 @@ class MainActivity : AppCompatActivity() {
         viewmodel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
     }
 
-
 }
