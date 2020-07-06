@@ -22,8 +22,11 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     fun getApiData()  = mainActivityRepository.getApiItemns()
 
     fun saveData(items : Items) {
-            databaseRepository.insertRow(items)
+            databaseRepository.insertItem(items)
     }
+
+    fun getItems() = databaseRepository.getItems()
+    fun getRowCount() = databaseRepository.getRowCount()
 
     fun title() = mainActivityRepository.getTitle()
 

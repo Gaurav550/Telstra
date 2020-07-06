@@ -25,6 +25,7 @@ class MainActivityAPITest {
     private lateinit var callback: Callback<Items>
     @Mock
     private lateinit var call: Call<Items>
+
     private lateinit var response: Response<Items>
     private lateinit var mainActivity: MainActivity
     private lateinit var mainActivityRepository: MainActivityRepository

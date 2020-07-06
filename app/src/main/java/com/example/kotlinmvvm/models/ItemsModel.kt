@@ -11,5 +11,5 @@ data class Items(
     @PrimaryKey(autoGenerate = true)
     var itemId: Int,
     val title : String,
-    val rows: MutableList<RowModel>
+    val rows: ArrayList<RowModel>
 )

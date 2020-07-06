@@ -43,6 +43,7 @@ class MainActivityRepository {
     }
 
     fun getApiItemns(): LiveData<Items> {
+        getDataFromApi()
         return headerItem
     }
     fun getTitle():MutableLiveData<String>{

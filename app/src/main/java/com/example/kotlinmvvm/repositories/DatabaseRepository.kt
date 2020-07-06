@@ -1,40 +1,55 @@
 package com.example.kotlinmvvm.repositories
 
 import android.app.Application
-import android.os.AsyncTask
-import androidx.lifecycle.LiveData
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import com.example.kotlinassignment.models.Items
-import com.example.kotlinmvvm.interfaces.ItemCallback
-import com.example.kotlinmvvm.models.RowModel
 import com.example.kotlinmvvm.storage.RoomDB
 import com.example.kotlinmvvm.storage.roomDAO.ItemDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
-class DatabaseRepository(application: Application) : ItemCallback {
-    override fun getItemData(data: LiveData<List<RowModel>>) {
-        itemData = data
-    }
+class DatabaseRepository(application: Application) : CoroutineScope {
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main
 
-    private var getDao: ItemDao
-    private lateinit var itemData: LiveData<List<RowModel>>
-
-
+    private var itemDao: ItemDao?
     init {
-        val database = RoomDB.getInstance(application)
-        getDao = database.getDao()
+        val db = RoomDB.getInstance(application)
+        itemDao = db.getDao()
     }
 
 
-    fun insertRow(items: Items) {
-        InsertData(getDao).execute(items)
+    //fun getItems() = itemDao?.getItems()
+    //fun getRowCount() = getTestedDao?.getRowCount()
+
+    //INSERTION
+    fun insertItem(item: Items) {
+       // CoroutineScope(Dispatchers.IO){}
+        launch { insertData(item) }
     }
 
-    class InsertData(val dao: ItemDao) : AsyncTask<Items, Void, Void>() {
-
-        override fun doInBackground(vararg params: Items): Void? {
-            dao.insert(params[0])
-            return null;
+    private suspend fun insertData(item: Items) {
+        withContext(Dispatchers.IO) {
+            itemDao?.insert(item)
         }
-
     }
+    fun getItems() = itemDao?.getItems()
+    fun getRowCount() = itemDao?.getRowCount()
+
+    //fetch ALl
+//    fun getItems() {
+//        launch { getAllItems() }
+//    }
+//    private suspend fun getAllItems() {
+//        withContext(Dispatchers.IO) {
+//            itemDao?.getItems()
+//        }
+//    }
+
 
 }

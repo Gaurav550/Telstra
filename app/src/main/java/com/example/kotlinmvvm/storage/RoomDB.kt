@@ -7,7 +7,7 @@ import com.example.kotlinmvvm.models.RowModel
 import com.example.kotlinmvvm.storage.roomDAO.ItemDao
 import com.example.kotlinmvvm.utils.TypeConverterDB
 
-@Database(entities = [Items::class], version = 3)
+@Database(entities = [Items::class], version = 1)
 @TypeConverters(TypeConverterDB::class)
 abstract class RoomDB : RoomDatabase() {
 
@@ -22,7 +22,7 @@ abstract class RoomDB : RoomDatabase() {
                 RoomDB::class.java,
                 "database_item"
             )
-                .fallbackToDestructiveMigration()
+                //.fallbackToDestructiveMigration()
                 .build()
             return dbInstance
         }
