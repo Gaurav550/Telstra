@@ -1,7 +1,5 @@
 package com.example.kotlinmvvm.repositories
 
-import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.kotlinassignment.models.Items
@@ -15,7 +13,7 @@ class MainActivityRepository {
 
     private var myItemData = MutableLiveData<MutableList<RowModel>>()
     private var headerItem = MutableLiveData<Items>()
-    private var title: MutableLiveData<String> = MutableLiveData<String>()
+    private var title: MutableLiveData<String> = MutableLiveData()
 
     fun getDataFromApi(): LiveData<MutableList<RowModel>> {
         RetrofitObject.retrofitInstance.create(RetrofitService::class.java).getData()
@@ -42,11 +40,12 @@ class MainActivityRepository {
         return myItemData
     }
 
-    fun getApiItemns(): LiveData<Items> {
+    fun getApiItems(): LiveData<Items> {
         getDataFromApi()
         return headerItem
     }
-    fun getTitle():MutableLiveData<String>{
+
+    fun getTitle(): MutableLiveData<String> {
 
         return title
     }

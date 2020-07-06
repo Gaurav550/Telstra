@@ -9,12 +9,6 @@ import java.util.ArrayList
 
 class TypeConverterDB {
 
-//    @TypeConverter
-//    fun listToJson(value: List<RowModel>?) = Gson().toJson(value)
-//
-//    @TypeConverter
-//    fun jsonToList(value: String) = Gson().fromJson(value, Array<RowModel>::class.java).toList()
-
     @TypeConverter
     fun fromString(value: String): ArrayList<RowModel>? {
         val listType = object : TypeToken<ArrayList<RowModel>>() {

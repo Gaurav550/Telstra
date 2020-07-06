@@ -7,22 +7,17 @@ import com.example.kotlinmvvm.repositories.DatabaseRepository
 import com.example.kotlinmvvm.repositories.MainActivityRepository
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
-    private var databaseRepository: DatabaseRepository
-    private var mainActivityRepository: MainActivityRepository
-
-    init {
-        databaseRepository = DatabaseRepository(application)
-        mainActivityRepository = MainActivityRepository()
-    }
+    private var databaseRepository: DatabaseRepository =  DatabaseRepository(application)
+    private var mainActivityRepository: MainActivityRepository = MainActivityRepository()
 
     fun getRepoData() =
         mainActivityRepository.getDataFromApi()
 
 
-    fun getApiData()  = mainActivityRepository.getApiItemns()
+    fun getApiData() = mainActivityRepository.getApiItems()
 
-    fun saveData(items : Items) {
-            databaseRepository.insertItem(items)
+    fun saveData(items: Items) {
+        databaseRepository.insertItem(items)
     }
 
     fun getItems() = databaseRepository.getItems()

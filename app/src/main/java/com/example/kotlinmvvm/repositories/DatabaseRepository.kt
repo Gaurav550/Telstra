@@ -1,9 +1,6 @@
 package com.example.kotlinmvvm.repositories
 
 import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import com.example.kotlinassignment.models.Items
 import com.example.kotlinmvvm.storage.RoomDB
 import com.example.kotlinmvvm.storage.roomDAO.ItemDao
@@ -18,18 +15,14 @@ class DatabaseRepository(application: Application) : CoroutineScope {
         get() = Dispatchers.Main
 
     private var itemDao: ItemDao?
+
     init {
         val db = RoomDB.getInstance(application)
         itemDao = db.getDao()
     }
 
-
-    //fun getItems() = itemDao?.getItems()
-    //fun getRowCount() = getTestedDao?.getRowCount()
-
     //INSERTION
     fun insertItem(item: Items) {
-       // CoroutineScope(Dispatchers.IO){}
         launch { insertData(item) }
     }
 
@@ -38,18 +31,8 @@ class DatabaseRepository(application: Application) : CoroutineScope {
             itemDao?.insert(item)
         }
     }
+
     fun getItems() = itemDao?.getItems()
     fun getRowCount() = itemDao?.getRowCount()
-
-    //fetch ALl
-//    fun getItems() {
-//        launch { getAllItems() }
-//    }
-//    private suspend fun getAllItems() {
-//        withContext(Dispatchers.IO) {
-//            itemDao?.getItems()
-//        }
-//    }
-
 
 }

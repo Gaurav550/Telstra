@@ -2,9 +2,7 @@ package com.example.kotlinassignment.activities
 
 import com.example.kotlinassignment.models.Items
 import com.example.kotlinmvvm.activities.MainActivity
-import com.example.kotlinmvvm.interfaces.RetrofitService
 import com.example.kotlinmvvm.repositories.MainActivityRepository
-import com.example.kotlinmvvm.singletons.RetrofitObject
 import org.junit.After
 import org.junit.Before
 
@@ -42,7 +40,7 @@ class MainActivityAPITest {
     @Test
     fun testApi() {
         //mainActivity.retrofitCall()
-        mainActivityRepository.getApiItemns()
+        mainActivityRepository.getApiItems()
 
         //val argument = ArgumentCaptor.forClass(MainActivityRepository::class.java)
         call.enqueue(argumentCaptor.capture())

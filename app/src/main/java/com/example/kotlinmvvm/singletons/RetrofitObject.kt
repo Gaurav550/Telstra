@@ -6,10 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitObject {
     var retrofitInstance: Retrofit
-
-    init {
-        retrofitInstance = Retrofit.Builder()
+         = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(Constants.BASE_URL).build()
-    }
+
 }

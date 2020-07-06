@@ -37,8 +37,9 @@ class ItemAdapter(private val rows: MutableList<RowModel>, val context: Context)
         }
 
         rows[position].imageHref?.let { url ->
-            holder.image?.let{
-                setImage(url, it)}
+            holder.image?.let {
+                setImage(url, it)
+            }
         }
     }
 
