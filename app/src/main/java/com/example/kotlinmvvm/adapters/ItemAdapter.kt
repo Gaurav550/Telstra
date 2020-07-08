@@ -1,7 +1,6 @@
 package com.example.kotlinmvvm.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlinmvvm.R
 import com.example.kotlinmvvm.models.RowModel
+import com.example.kotlinmvvm.utils.Constants
 
-class ItemAdapter(private val rows: MutableList<RowModel>, val context: Context) :
+class ItemAdapter(private val rows: MutableList<RowModel>,private val context: Context) :
     RecyclerView.Adapter<ItemAdapter.MyHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
@@ -41,6 +41,9 @@ class ItemAdapter(private val rows: MutableList<RowModel>, val context: Context)
                 setImage(url, it)
             }
         }
+        if(rows[position].imageHref == null || rows[position].imageHref =="" || rows[position].imageHref=="null"){
+            setImage(Constants.URL, holder.image!!)
+        }
     }
 
     inner class MyHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -50,11 +53,14 @@ class ItemAdapter(private val rows: MutableList<RowModel>, val context: Context)
     }
 
     private fun setImage(url: String, view: ImageView) {
-        Log.e("image url is : ", url)
-        Glide.with(view.context)
-            //.load(url)
-            .load("https://images.unsplash.com/photo-1566487097168-e91a4f38bee2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80")
-            .into(view)
-    }
+        var imageUrl: String = url
+        if (url.startsWith("http://")) {
+            imageUrl = "https://" + url.split("http://")[1]
+        }
+            Glide.with(view.context)
+                .load(imageUrl)
+                .into(view)
+        }
+
 
 }
